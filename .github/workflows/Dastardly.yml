@@ -1,6 +1,5 @@
 scan with-dastardly:
     name: Scan with Dastardly
-    runs-on: unbuntu-latest
     needs: deploy-to-azure
 
     steps:
