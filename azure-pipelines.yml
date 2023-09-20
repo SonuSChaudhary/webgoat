@@ -88,3 +88,25 @@ steps:
 #                    echo $entitlementID
 #                    curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' --header 'Authorization: Bearer '${tok3n} -d '{"startDate": "2022-08-29T11:52:08.980Z", "assessmentTypeId": ${assessmenttypeID}, "entitlementId": ${entitlementID}, "entitlementFrequencyType": "SingleScan", "isRemediationScan": false, "isBundledAssessment": false, "parentAssessmentTypeId": 0, "applyPreviousScanSettings": false, "scanMethodType": "IDE", "scanTool": "string", "scanToolVersion": "string"}' 'https://api.sandbox.fortify.com/api/v3/releases/9516/dynamic-scans/start-scan'
 
+scan with-dastardly:
+    name: Scan with Dastardly
+    runs-on: unbuntu-latest
+    needs: deploy-to-azure
+
+    steps:
+      - name: Run Dastardly Action Step
+        # This allows subsequent steps to run even if this step fails
+        continue-on-error: true                        
+        uses: PortSwigger/dastardly-github-action@main
+        with:
+          target-url: 'https://ginandjuice.shop'
+    
+      # You can replace this next step with any JUnit XML parser of your choosing
+      - name: Publish Test Report
+        # Forces this step to always run
+        if: always()                                    
+        uses: mikepenz/action-junit-report@v3
+        with:
+            # You need to update this path if you pass in a different output filename to the Dastardly action
+          report_paths: '**/dastardly-report.xml'       
+          require_tests: true
