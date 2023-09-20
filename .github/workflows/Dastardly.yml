@@ -1,14 +1,18 @@
----
-name: Dastardly Action
-on:
-  - push
-continue-on-error: true
-uses: PortSwigger/dastardly-github-action@main
-with:
-  target-url: https://ginandjuice.shop
-name1: Publish Test Report
-if: always()
-uses1: mikepenz/action-junit-report@v3
-with1:
-  report_paths: "**/dastardly-report.xml"
-  require_tests: true
+scan with-dastardly:
+    name: Scan with Dastardly
+    runs-on: unbuntu-latest
+    needs: deploy-to-azure
+
+    steps:
+      - name: Run Dastardly Action Step
+        continue-on-error: true                        
+        uses: PortSwigger/dastardly-github-action@main
+        with:
+          target-url: 'https://ginandjuice.shop'
+    
+      - name: Publish Test Report
+        if: always()                                    
+        uses: mikepenz/action-junit-report@v3
+        with:
+          report_paths: '**/dastardly-report.xml'       
+          require_tests: true
