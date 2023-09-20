@@ -1,5 +1,6 @@
 scan with-dastardly:
     name: Scan with Dastardly
+    on: [push]
     needs: deploy-to-azure
 
     steps:
