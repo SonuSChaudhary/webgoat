@@ -11,7 +11,7 @@ jobs:
         uses: PortSwigger/dastardly-github-action@main
         with:
           target-url: 'https://google-gruyere.appspot.com/'
-          output-filename: junit-test-report.xml
+          output-filename: .github/workflows/junit-test-report.xml
 
       - name: Publish Test Report
         if: always()
