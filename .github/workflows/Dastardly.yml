@@ -11,13 +11,12 @@ jobs:
         uses: PortSwigger/dastardly-github-action@main
         with:
           target-url: 'https://google-gruyere.appspot.com/'
-          output-filename: junit-test-report.xml
 
       - name: Publish Test Report
         if: always()
         uses: mikepenz/action-junit-report@v3
         with:
-          report_paths: .github/workflows/junit-test-report.xml
+          report_paths: .github/workflows/dastardly-report.xml
           require_Tests: true 
 
 permissions:
