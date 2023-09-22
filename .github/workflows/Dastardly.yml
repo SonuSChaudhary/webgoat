@@ -16,7 +16,7 @@ jobs:
             if: always()                                    
             uses: mikepenz/action-junit-report@v3
             with:
-              report_paths: '**/vul-report.xml'       
+              report_paths: '**/dastardly.xml'       
               require_tests: true
 permissions:
     contents: read
