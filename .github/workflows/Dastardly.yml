@@ -19,3 +19,8 @@ jobs:
           report_paths: .github/workflows/test-result.xml
           output-filename: junit-test-report.xml
           require_tests: true
+
+permissions:
+    contents: read
+    checks: write
+    id-token: write
