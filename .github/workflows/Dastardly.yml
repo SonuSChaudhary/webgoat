@@ -20,6 +20,10 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           output-filename: test-report.xml
           require_tests: true
+          cache: npm
+      - run: npm install
+      - run: npm run eslint
+      - run: npm run test 
 
 permissions:
     contents: read
