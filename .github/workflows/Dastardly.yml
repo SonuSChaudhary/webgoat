@@ -2,23 +2,24 @@ name: Scan with Dastardly
 
 on: [push]
 
-jobs: 
-    test:
-        runs-on: ubuntu-latest
-        steps:
-          - name: Run Dastardly Action Step
-            continue-on-error: true                        
-            uses: PortSwigger/dastardly-github-action@main
-            with:
-              target-url: 'https://google-gruyere.appspot.com/'
-        
-          - name: Publish Test Report
-            if: always()                                    
-            uses: mikepenz/action-junit-report@v3
-            with:
-              report_paths: .github/workflows/test-result.xml
-              output-filename: .github/workflows/test-result.xml 
-              require_tests: true
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Dastardly Action Step
+        continue-on-error: true
+        uses: PortSwigger/dastardly-github-action@main
+        with:
+          target-url: 'https://google-gruyere.appspot.com/'
+
+      - name: Publish Test Report
+        if: always()
+        uses: mikepenz/action-junit-report@v3
+        with:
+          report_paths: .github/workflows/test-result.xml  # Correct path to your test result XML
+          output-filename: junit-test-report.xml  # Specify a different name for the published report
+          require_tests: true
+
 permissions:
     contents: read
     checks: write
