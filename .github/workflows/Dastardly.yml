@@ -1,4 +1,4 @@
-name: Scan with Dastardly
+name: Dastardly Scan
 
 on: [push]
 
@@ -16,11 +16,6 @@ jobs:
         if: always()
         uses: mikepenz/action-junit-report@v3
         with:
-          report_paths: .github/workflows/test-result.xml  # Correct path to your test result XML
-          output-filename: junit-test-report.xml  # Specify a different name for the published report
+          report_paths: .github/workflows/test-result.xml
+          output-filename: junit-test-report.xml
           require_tests: true
-
-permissions:
-    contents: read
-    checks: write
-    id-token: write
