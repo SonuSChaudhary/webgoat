@@ -1,24 +1,24 @@
-name: Dastardly Scan
+name: dastardly-scan
 
-on: [push]
+on: 
+  workflow_dispatch: {}
 
 jobs:
-  test:
+  dastardly-scan:
+    name: dastardly scan
     runs-on: ubuntu-latest
     steps:
       - name: Run Dastardly Action Step
-        continue-on-error: true
+        continue-on-error: true 
         uses: PortSwigger/dastardly-github-action@main
         with:
           target-url: 'https://google-gruyere.appspot.com/'
-
       - name: Publish Test Report
         if: always()
         uses: mikepenz/action-junit-report@v3
         with:
-          report_paths: .github/workflows/dastardly-report.xml
-          require_Tests: true 
-
+          report_paths: '**/dastardly-report.xml'
+          require_Tests: true
 permissions:
     contents: read
     issues: read
